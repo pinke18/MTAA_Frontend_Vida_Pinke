@@ -2,46 +2,10 @@ import * as React from 'react';
 import { View, Text , Button} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import LoginScreen from './Screens/Login';
+import RegisterScreen from './Screens/Register';
+import MenuScreen from './Screens/Menu';
 
-function LoginScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Login Screen</Text>
-      <Button
-        title="Login"
-        onPress={() => navigation.navigate('Menu')}
-      />
-      <Button
-        title="Register"
-        onPress={() => navigation.navigate('Register')}
-      />
-    </View>
-  );
-}
-
-function RegisterScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Register Screen</Text>
-      <Button
-          title="Register"
-          onPress={() => navigation.navigate('Login')}
-       />
-    </View>
-  );
-}
-
-function MenuScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Menu Screen</Text>
-        <Button
-            title="Logout"
-            onPress={() => navigation.navigate('Login')}
-        />
-    </View>
-  );
-}
 
 const Stack = createNativeStackNavigator();
 
