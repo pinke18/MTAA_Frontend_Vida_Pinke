@@ -33,15 +33,30 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const addUser = (email, password) => {
-    fetch("http://192.168.0.80:8000/register", {
+const addUser = (email, password, navigation) => {
+     fetch("http://192.168.0.80:8000/register", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
     })
-    console.warn("SUCCESS!")
+    .then(response => {
+        console.log("Zaciatok")
+        const statusCode = response.status;
+        return Promise.all([statusCode]);
+      })
+      .then((res) => {
+        console.log(res)
+        if(res=='[200]'){
+            navigation.navigate('Login')
+        }
+        navigation.navigate('Login')
+      })
+      .catch(error => {
+        console.error(error);
+        return { name: "network error", description: "" };
+      });
 };
 
 const Section = ({children, title}): Node => {
@@ -80,7 +95,7 @@ function RegisterScreen({ navigation }) {
         <View>
           <Section title="Register">
           </Section>
-          <Form onButtonPress={() => addUser(email, password)} buttonStyle={styles.buttonContainer}>
+          <Form onButtonPress={() => addUser(email, password, navigation)} buttonStyle={styles.buttonContainer}>
               <FormItem
                label="Email"
                labelStyle={{margin:10}}
