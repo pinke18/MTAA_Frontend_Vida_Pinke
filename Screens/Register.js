@@ -8,6 +8,7 @@ import {
   useColorScheme,
   View,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import { Form, FormItem, Picker } from 'react-native-form-component';
 
@@ -31,7 +32,9 @@ const addUser = (email, password, repassword, navigation) => {
                     navigation.navigate('Login')
                     console.warn("Success!")
                 }
-                navigation.navigate('Login')
+                else{
+                  Alert.alert('Email arleady in use')
+                }
               })
               .catch(error => {
                 console.error(error);

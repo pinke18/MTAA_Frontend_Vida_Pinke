@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { Form, FormItem, Picker } from 'react-native-form-component';
 
-/*const loginUser = async (email, password, navigation) => {
+const loginUser1 = async (email, password, navigation) => {
         return fetch("http://192.168.0.80:8000/login", {
               method: "post",
               headers: {
@@ -22,14 +22,15 @@ import { Form, FormItem, Picker } from 'react-native-form-component';
               },
               body: JSON.stringify({ email, password }),
             })
-            /*.then(response => {
+            .then(response => {
                 console.log(response.status)
                 const statusCode = response.status;
-                return Promise.all([statusCode]);
+                return response.status//Promise.all([statusCode]);
               })
               .then((res) => {
                 console.log(res)
-                if(res=='[200]'){
+                if(res=='200'){
+                    //navigation.navigate('Menu')
                     navigation.navigate('Menu')
                 }
                 navigation.navigate('Login')
@@ -38,23 +39,31 @@ import { Form, FormItem, Picker } from 'react-native-form-component';
                 console.error(error);
                 return { name: "network error", description: "" };
               });
-};*/
+};
 
-const getMoviesFromApi = () => {
-  return fetch('https://reactnative.dev/movies.json%27')
+const loginUser = (email, password, navigation) => {
+  return fetch("http://192.168.0.80:8000/login", {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  })
     .then((response) => {
-
-    response.json())
-    })
-    .then((json) => {
       console.log(response.status)
-      return json.movies;
+      if(response.status == 200)
+      {
+        navigation.navigate('Menu')
+      }
+      else
+      {
+        Alert.alert("Wrong Credentials!")
+      }
     })
     .catch((error) => {
       console.error(error);
     });
-};
-
+  };
 
 function LoginScreen({ navigation }) {
   const [email, setEmail] = React.useState(null);
@@ -62,7 +71,7 @@ function LoginScreen({ navigation }) {
   return (
   <SafeAreaView style={styles.container}>
           <View>
-              <Form onButtonPress={() => getMoviesFromApi()} buttonText={"Login"}>
+              <Form onButtonPress={() => loginUser(email, password, navigation)} buttonText={"Login"}>
                   <FormItem
                    label="Email"
                    labelStyle={{margin:10}}
