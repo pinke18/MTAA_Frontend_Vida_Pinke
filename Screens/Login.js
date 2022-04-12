@@ -1,20 +1,120 @@
-import * as React from 'react';
-import { View, Text , Button} from 'react-native';
+import React from 'react';
+import type {Node} from 'react';
+import {
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  useColorScheme,
+  View,
+  Button,
+  SafeAreaView,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+import { Form, FormItem, Picker } from 'react-native-form-component';
+
+/*const loginUser = async (email, password, navigation) => {
+        return fetch("http://192.168.0.80:8000/login", {
+              method: "post",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email, password }),
+            })
+            /*.then(response => {
+                console.log(response.status)
+                const statusCode = response.status;
+                return Promise.all([statusCode]);
+              })
+              .then((res) => {
+                console.log(res)
+                if(res=='[200]'){
+                    navigation.navigate('Menu')
+                }
+                navigation.navigate('Login')
+              })
+              .catch(error => {
+                console.error(error);
+                return { name: "network error", description: "" };
+              });
+};*/
+
+const getMoviesFromApi = () => {
+  return fetch('https://reactnative.dev/movies.json%27')
+    .then((response) => {
+
+    response.json())
+    })
+    .then((json) => {
+      console.log(response.status)
+      return json.movies;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
 
 function LoginScreen({ navigation }) {
+  const [email, setEmail] = React.useState(null);
+  const [password, setPassword] = React.useState(null);
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Login Screen</Text>
-      <Button
-        title="Login"
-        onPress={() => navigation.navigate('Menu')}
-      />
-      <Button
-        title="Register"
-        onPress={() => navigation.navigate('Register')}
-      />
-    </View>
+  <SafeAreaView style={styles.container}>
+          <View>
+              <Form onButtonPress={() => getMoviesFromApi()} buttonText={"Login"}>
+                  <FormItem
+                   label="Email"
+                   labelStyle={{margin:10}}
+                   textInputStyle={styles.input}
+                   errorBorderColor={'grey'}
+                   isRequired
+                   value={email}
+                   onChangeText={(email) => setEmail(email)}
+                   asterik
+                  />
+                  <FormItem
+                    label="Password"
+                    labelStyle={{margin:10}}
+                    secureTextEntry={true}
+                    textInputStyle={styles.input}
+                    errorBorderColor={'grey'}
+                    isRequired
+                    value={password}
+                    onChangeText={(password) => setPassword(password)}
+                    asterik
+                  />
+              </Form>
+              <TouchableOpacity onPress={() => navigation.navigate('Register')} style={styles.button}>
+                <Text style={styles.buttonText}>Register</Text>
+              </TouchableOpacity>
+          </View>
+  </SafeAreaView>
   );
+
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    marginHorizontal: 16,
+  },
+  input: {
+      height: 40,
+      margin: 12,
+      borderWidth: 1,
+      padding: 10,
+    },
+   button: {
+       backgroundColor: "red",
+       padding: 15,
+       borderRadius: 10,
+   },
+   buttonText: {
+       color: "white",
+       textAlign: 'center',
+   }
+});
 
 export default LoginScreen

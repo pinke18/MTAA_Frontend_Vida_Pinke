@@ -1,101 +1,57 @@
-/*import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  Button,
-} from 'react-native';
-import { Form, FormItem, Picker } from 'react-native-form-component';*/
-
 import React from 'react';
 import type {Node} from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
   View,
+  SafeAreaView,
 } from 'react-native';
 import { Form, FormItem, Picker } from 'react-native-form-component';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const addUser = (email, password, navigation) => {
-     fetch("http://192.168.0.80:8000/register", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    })
-    .then(response => {
-        console.log("Zaciatok")
-        const statusCode = response.status;
-        return Promise.all([statusCode]);
-      })
-      .then((res) => {
-        console.log(res)
-        if(res=='[200]'){
-            navigation.navigate('Login')
-        }
-        navigation.navigate('Login')
-      })
-      .catch(error => {
-        console.error(error);
-        return { name: "network error", description: "" };
-      });
+const addUser = (email, password, repassword, navigation) => {
+    if(repassword == password){
+        fetch("http://192.168.0.80:8000/register", {
+              method: "post",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email, password }),
+            })
+            .then(response => {
+                console.log("Zaciatok")
+                const statusCode = response.status;
+                return Promise.all([statusCode]);
+              })
+              .then((res) => {
+                console.log(res)
+                if(res=='[200]'){
+                    navigation.navigate('Login')
+                    console.warn("Success!")
+                }
+                navigation.navigate('Login')
+              })
+              .catch(error => {
+                console.error(error);
+                return { name: "network error", description: "" };
+              });
+    }
+    else {
+        console.error("Passwords do no match!" + password + repassword);
+    }
 };
-
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
 
 function RegisterScreen({ navigation }) {
   const [email, setEmail] = React.useState(null);
   const [password, setPassword] = React.useState(null);
+  const [repassword, setRepassword] = React.useState(null);
 
   return (
-    <SafeAreaView>
+  <SafeAreaView style={styles.container}>
         <View>
-          <Section title="Register">
-          </Section>
-          <Form onButtonPress={() => addUser(email, password, navigation)} buttonStyle={styles.buttonContainer}>
+          <Form onButtonPress={() => addUser(email, password, repassword, navigation)} buttonText={"Create account"}>
               <FormItem
                label="Email"
                labelStyle={{margin:10}}
@@ -109,6 +65,7 @@ function RegisterScreen({ navigation }) {
               <FormItem
                 label="Password"
                 labelStyle={{margin:10}}
+                secureTextEntry={true}
                 textInputStyle={styles.input}
                 errorBorderColor={'grey'}
                 isRequired
@@ -116,6 +73,17 @@ function RegisterScreen({ navigation }) {
                 onChangeText={(password) => setPassword(password)}
                 asterik
               />
+              <FormItem
+               label="Re-enter password"
+               labelStyle={{margin:10}}
+               secureTextEntry={true}
+               textInputStyle={styles.input}
+               errorBorderColor={'grey'}
+               isRequired
+               value={repassword}
+               onChangeText={(repassword) => setRepassword(repassword)}
+               asterik
+             />
           </Form>
           </View>
     </SafeAreaView>
@@ -124,21 +92,10 @@ function RegisterScreen({ navigation }) {
 
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+container: {
+    flex: 1,
+    justifyContent: 'center',
+    marginHorizontal: 16,
   },
   input: {
       height: 40,
