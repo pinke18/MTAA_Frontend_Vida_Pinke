@@ -27,7 +27,6 @@ const loginUser = (email, password, navigation) => {
       console.log(response.status)
       if(response.status == 200)
       {
-        navigation.navigate('Menu')
         return response.json()
       }
       else
@@ -36,7 +35,15 @@ const loginUser = (email, password, navigation) => {
       }
     })
     .then((json) => {
-      global.auth = json.token
+    if (typeof json !== 'undefined'){
+        global.auth = json.token
+          if (json.usertype == 'user'){
+              navigation.navigate('Menu')
+          }
+          if(json.usertype == 'admin'){
+              navigation.navigate('MenuAdmin')
+          }
+    }
     })
     .catch((error) => {
       console.error(error);
