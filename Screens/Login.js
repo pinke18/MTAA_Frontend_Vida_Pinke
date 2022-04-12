@@ -13,33 +13,7 @@ import {
   Alert,
 } from 'react-native';
 import { Form, FormItem, Picker } from 'react-native-form-component';
-
-const loginUser1 = async (email, password, navigation) => {
-        return fetch("http://192.168.0.80:8000/login", {
-              method: "post",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ email, password }),
-            })
-            .then(response => {
-                console.log(response.status)
-                const statusCode = response.status;
-                return response.status//Promise.all([statusCode]);
-              })
-              .then((res) => {
-                console.log(res)
-                if(res=='200'){
-                    //navigation.navigate('Menu')
-                    navigation.navigate('Menu')
-                }
-                navigation.navigate('Login')
-              })
-              .catch(error => {
-                console.error(error);
-                return { name: "network error", description: "" };
-              });
-};
+import App from '../App';
 
 const loginUser = (email, password, navigation) => {
   return fetch("http://192.168.0.80:8000/login", {
@@ -54,11 +28,15 @@ const loginUser = (email, password, navigation) => {
       if(response.status == 200)
       {
         navigation.navigate('Menu')
+        return response.json()
       }
       else
       {
         Alert.alert("Wrong Credentials!")
       }
+    })
+    .then((json) => {
+      global.auth = json.token
     })
     .catch((error) => {
       console.error(error);
