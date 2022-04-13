@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, Button, View } from 'react-native';
+import { Text, StyleSheet, Button, View, TouchableOpacity} from 'react-native';
 
 import { RTCPeerConnection, RTCView, mediaDevices, RTCIceCandidate, RTCSessionDescription } from 'react-native-webrtc';
 import { db } from '../firebase';
@@ -130,18 +130,28 @@ function JoinCallScreen({ setScreen, screens, roomId }) {
 
       <View style={styles.callButtons} >
         <View styles={styles.buttonContainer} >
-          <Button title="Click to stop call" onPress={onBackPress} />
+          <TouchableOpacity onPress={onBackPress} style={styles.button}>
+            <Text style={styles.buttonText}>Click to stop call</Text>
+          </TouchableOpacity>
         </View>
         <View styles={styles.buttonContainer} >
-          {!localStream && <Button title='Click to start stream' onPress={startLocalStream} />}
-          {localStream && <Button title='Click to join call' onPress={() => joinCall(roomId)} disabled={!!remoteStream} />}
+          {!localStream &&  <TouchableOpacity onPress={startLocalStream} style={styles.button}>
+            <Text style={styles.buttonText}>Click to start stream</Text>
+          </TouchableOpacity>}
+          {localStream && <TouchableOpacity onPress={() => joinCall(roomId)} style={styles.button}>
+              <Text style={styles.buttonText}>Click to join call</Text>
+          </TouchableOpacity>}
         </View>
       </View>
 
       {localStream && (
         <View style={styles.toggleButtons}>
-          <Button title='Switch camera' onPress={switchCamera} />
-          <Button title={`${isMuted ? 'Unmute' : 'Mute'} stream`} onPress={toggleMute} disabled={!remoteStream} />
+        <TouchableOpacity onPress={switchCamera} style={styles.button}>
+              <Text style={styles.buttonText}>Switch camera</Text>
+        </TouchableOpacity>
+          <TouchableOpacity onPress={toggleMute} style={styles.button}>
+            <Text style={styles.buttonText}>{`${isMuted ? 'Unmute' : 'Mute'} stream`}</Text>
+          </TouchableOpacity>
         </View>
       )}
 
@@ -186,9 +196,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
-  buttonContainer: {
-    margin: 5,
-  }
+   button: {
+       backgroundColor: "red",
+       padding: 15,
+       borderRadius: 10,
+       marginVertical: 10,
+       marginHorizontal: 10,
+   },
+   buttonText: {
+       color: "white",
+       textAlign: 'center',
+   }
 });
 
 export default JoinCallScreen

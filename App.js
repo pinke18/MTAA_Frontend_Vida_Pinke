@@ -14,7 +14,6 @@ import ViewticketsAdminScreen from './Screens/ViewticketsAdmin';
 import CallAppScreen from './Screens/CallApp';
 
 
-
 const Stack = createNativeStackNavigator();
 
 function App() {
