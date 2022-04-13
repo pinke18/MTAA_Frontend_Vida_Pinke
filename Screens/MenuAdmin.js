@@ -23,7 +23,7 @@ function MenuScreen({ navigation }) {
                 <Text style={styles.buttonText}>View tickets</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => navigation.navigate('Call')} style={styles.button}>
-                <Text style={styles.buttonText}>Create a conference call</Text>
+                <Text style={styles.buttonText}>Create a call</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => navigation.navigate('Activechats')} style={styles.button}>
                 <Text style={styles.buttonText}>Active chats screen</Text>

@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "745443351424",
+    "project_id": "mtaa-vida-pinke",
+    "storage_bucket": "mtaa-vida-pinke.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745443351424:android:4ebdf46bad3cd74c40ff65",
+        "android_client_info": {
+          "package_name": "com.mtaa_frontend_vida_pinke"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "745443351424-2rlohal0mhmrqc4n8jkupe5l0i9el88n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFxAIgPJBKfMzAxpa5RX1fAXY9vHCDOac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "745443351424-2rlohal0mhmrqc4n8jkupe5l0i9el88n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745443351424:android:70397faa85a47bc840ff65",
+        "android_client_info": {
+          "package_name": "mtaa.vide.pinke"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "745443351424-2rlohal0mhmrqc4n8jkupe5l0i9el88n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFxAIgPJBKfMzAxpa5RX1fAXY9vHCDOac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "745443351424-2rlohal0mhmrqc4n8jkupe5l0i9el88n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

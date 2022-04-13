@@ -17,10 +17,10 @@ import CallScreen from './Screens/Call';
 
 const Stack = createNativeStackNavigator();
 
-function App() {
+function Appp() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Call">
         <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login' }} />
         <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'Register' }} />
         <Stack.Screen name="Menu" component={MenuScreen} options={{ title: 'Menu' }} />
@@ -36,4 +36,4 @@ function App() {
   );
 }
 
-export default App;
+export default Appp;

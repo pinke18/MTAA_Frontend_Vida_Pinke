@@ -1,17 +1,42 @@
-import * as React from 'react';
-import { View, Text , Button} from 'react-native';
+import React, { useState } from 'react';
+import { Text, StyleSheet, Button, View, TextInput } from 'react-native';
 
-function CallScreen({ navigation }) {
-    return (
+function CallScreen({ setScreen, screens, setRoomId, roomId }) {
 
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Call Screen</Text>
-          <Button
-              title="Logout"
-              onPress={() => navigation.navigate('Login')}
-          />
-      </View>
-    );
+  const onCallOrJoin = (screen) => {
+    if (roomId.length > 0) {
+      setScreen(screen)
+    }
   }
 
-  export default CallScreen
+  return (
+    <>
+      <Text style={styles.heading} >Select a Room</Text>
+      <TextInput style={styles.input} value={roomId} onChangeText={setRoomId} />
+      <View style={styles.buttonContainer} >
+        <Button title="Join Screen" onPress={() => onCallOrJoin(screens.JOIN)} />
+      </View>
+      <View style={styles.buttonContainer} >
+        <Button title="Call Screen" onPress={() => onCallOrJoin(screens.CALL)} />
+      </View>
+    </>
+  )
+}
+
+const styles = StyleSheet.create({
+  heading: {
+    marginVertical: 10,
+    alignSelf: 'center',
+    fontSize: 30,
+  },
+  input: {
+    margin: 20,
+    height: 40,
+    backgroundColor: '#aaa'
+  },
+  buttonContainer: {
+    margin: 5
+  }
+});
+
+export default CallScreen

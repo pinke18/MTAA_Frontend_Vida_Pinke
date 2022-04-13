@@ -12,7 +12,6 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import App from '../App';
 
 function MenuScreen({ navigation }) {
     return (
