@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import App from '../App';
+import App from './CallApp';
 
 function MenuScreen({ navigation }) {
     return (
@@ -22,7 +22,7 @@ function MenuScreen({ navigation }) {
               <TouchableOpacity onPress={() => navigation.navigate('ViewticketsAdmin')} style={styles.button}>
                 <Text style={styles.buttonText}>View tickets</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => navigation.navigate('Call')} style={styles.button}>
+              <TouchableOpacity onPress={() => navigation.navigate('CallAppScreen')} style={styles.button}>
                 <Text style={styles.buttonText}>Create a call</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => navigation.navigate('Activechats')} style={styles.button}>

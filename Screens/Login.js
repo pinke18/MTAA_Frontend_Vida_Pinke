@@ -13,7 +13,7 @@ import {
   Alert,
 } from 'react-native';
 import { Form, FormItem, Picker } from 'react-native-form-component';
-import App from '../App';
+import App from './CallApp';
 
 const loginUser = (email, password, navigation) => {
   return fetch("http://192.168.0.80:8000/login", {
