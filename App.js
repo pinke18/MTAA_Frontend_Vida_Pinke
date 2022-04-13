@@ -1,39 +1,49 @@
-import * as React from 'react';
-import { View, Text , Button} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from './Screens/Login';
-import RegisterScreen from './Screens/Register';
-import MenuScreen from './Screens/Menu';
-import MenuAdminScreen from './Screens/MenuAdmin';
-import ActivechatsScreen from './Screens/Activechats';
-import CreateticketScreen from './Screens/Createticket';
-import ViewticketsScreen from './Screens/Viewtickets';
-import CommonproblemsScreen from './Screens/Commonproblems';
-import ViewticketsAdminScreen from './Screens/ViewticketsAdmin';
+import React, { useState } from 'react';
+import { Text, StyleSheet, SafeAreaView, RecyclerViewBackedScrollView } from 'react-native';
 import CallScreen from './Screens/Call';
+import CreateRoomScreen from './Screens/CallRoom';
+import JoinCallScreen from './Screens/JoinCall';
 
+// Just to handle navigation
+export default function App() {
+  const screens = {
+    ROOM: 'JOIN_ROOM',
+    CALL: 'CALL',
+    JOIN: 'JOIN',
+  }
 
+  const [screen, setScreen] = useState(screens.ROOM);
+  const [roomId, setRoomId] = useState('');
 
-const Stack = createNativeStackNavigator();
+  let content;
 
-function Appp() {
+  switch (screen) {
+    case screens.ROOM:
+      content = <CallScreen roomId={roomId} setRoomId={setRoomId} screens={screens} setScreen={setScreen} />
+      break;
+
+    case screens.CALL:
+      content = <CreateRoomScreen roomId={roomId} screens={screens} setScreen={setScreen} />
+      break;
+
+    case screens.JOIN:
+      content = <JoinCallScreen roomId={roomId} screens={screens} setScreen={setScreen} />
+      break;
+
+    default:
+      content = <Text>Wrong Screen</Text>
+  }
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Call">
-        <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login' }} />
-        <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'Register' }} />
-        <Stack.Screen name="Menu" component={MenuScreen} options={{ title: 'Menu' }} />
-        <Stack.Screen name="MenuAdmin" component={MenuAdminScreen} options={{ title: 'MenuAdmin' }} />
-        <Stack.Screen name="Activechats" component={ActivechatsScreen} options={{ title: 'Activechats' }} />
-        <Stack.Screen name="Commonproblems" component={CommonproblemsScreen} options={{ title: 'Commonproblems' }} />
-        <Stack.Screen name="Createticket" component={CreateticketScreen} options={{ title: 'Createticket' }} />
-        <Stack.Screen name="Viewtickets" component={ViewticketsScreen} options={{ title: 'Viewtickets' }} />
-        <Stack.Screen name="ViewticketsAdmin" component={ViewticketsAdminScreen} options={{ title: 'ViewticketsAdmin' }} />
-        <Stack.Screen name="Call" component={CallScreen} options={{ title: 'Call' }} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+    <SafeAreaView style={styles.container} >
+      {content}
+    </SafeAreaView>
+  )
 }
 
-export default Appp;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+});
