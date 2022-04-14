@@ -14,7 +14,7 @@ import { Form, FormItem, Picker } from 'react-native-form-component';
 
 const addUser = (email, password, repassword, navigation) => {
     if(repassword == password){
-        fetch("http://192.168.0.80:8000/register", {
+        fetch("http://192.168.1.18:8000/register", {
               method: "post",
               headers: {
                 "Content-Type": "application/json",
@@ -28,9 +28,9 @@ const addUser = (email, password, repassword, navigation) => {
               })
               .then((res) => {
                 console.log(res)
-                if(res=='[200]'){
+                if(res=='200'){
                     navigation.navigate('Login')
-                    console.warn("Success!")
+                    Alert.alert("Account Created!")
                 }
                 else{
                   Alert.alert('Email arleady in use')

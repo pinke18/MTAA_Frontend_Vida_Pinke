@@ -16,7 +16,7 @@ import { Form, FormItem, Picker } from 'react-native-form-component';
 import App from './CallApp';
 
 const loginUser = (email, password, navigation) => {
-  return fetch("http://192.168.0.80:8000/login", {
+  return fetch("http://192.168.1.18:8000/login", {
     method: "post",
     headers: {
       "Content-Type": "application/json",
