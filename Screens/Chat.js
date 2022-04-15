@@ -4,13 +4,22 @@ import { View, Text , Button, FlatList, TouchableOpacity, StyleSheet, Alert, Saf
 
 function ChatScreen({ route, navigation }) {
     const chatList = route.params;
+    console.log(chatList.creator, chatList.worker, global.userid)
+    let reciever = 0
+    if(global.userid == chatList.worker){
+      reciever = chatList.creator;
+    }
+    else if(global.userid == chatList.creator){
+      reciever = chatList.worker;
+    }
+    console.log(reciever)
     console.log(chatList)
     return (
 
       <View style={{ flex: 1}}>
         <FlatList
                   data={chatList.chats}
-                  renderItem={({ item, index }) => { if (item.from !== global.username) {
+                  renderItem={({ item, index }) => { if (item.from !== reciever) {
               
                     return (
         
@@ -80,7 +89,7 @@ function ChatScreen({ route, navigation }) {
               />
         <SafeAreaView style={styles.container}>
       <View>
-              <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.button}>
+              <TouchableOpacity onPress={() => navigation.navigate('SendMessageScreen', {to: reciever, from: global.userid, ticketID: chatList.ticketID})} style={styles.button}>
                 <Text style={styles.buttonText}>Send message</Text>
               </TouchableOpacity>
       </View>

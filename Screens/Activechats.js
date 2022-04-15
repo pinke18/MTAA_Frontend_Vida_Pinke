@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text , Button, FlatList, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 
-const onClickChat = (navigation, chatID) => {
+const onClickChat = (navigation, chatID, createdBy, assignedTo) => {
   return fetch("http://192.168.1.18:8000/getmessages?ticketid=" + chatID, {
     method: "get",
     headers: {
@@ -11,13 +11,14 @@ const onClickChat = (navigation, chatID) => {
   })
   .then((res) => {
     console.log(chatID)
+    //console.log(assignedTo)
     return res.json()
   })
   .then((json) => {
-    console.log(json)
+    //console.log(json)
     //console.log(json[0].createdBy_id[0].id)
     //console.log(json[0].createdBy_id[0].email)
-    navigation.navigate('ChatScreen' , {chats: json});
+    navigation.navigate('ChatScreen' , {chats: json, creator: createdBy, worker: assignedTo, ticketID: chatID });
   })
   .catch((err) => {
     Alert.alert("Error retrieving chat")
@@ -27,14 +28,16 @@ const onClickChat = (navigation, chatID) => {
 
 function ActivechatsScreen({ route, navigation }) {
     const ticketList = route.params;
-    console.log(ticketList.ticketList);
+    //const ticketAdmin = ticketList.
+    //const ticketUser = ticketList.
+    //console.log(ticketList.ticketList);
     return (
 
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>ActivechatsScreen</Text>
         <FlatList
                   data={ticketList.ticketList}
-                  renderItem={({ item }) => <TouchableOpacity onPress={() => onClickChat(navigation, item.id.toString()) } style={styles.button}>
+                  renderItem={({ item }) => <TouchableOpacity onPress={() => onClickChat(navigation, item.id.toString(), item.createdBy_id[0].id, item.assignedTo_id[0].id) } style={styles.button}>
                   <Text style={styles.buttonText}>{item.name}</Text>
                 </TouchableOpacity>}
               />

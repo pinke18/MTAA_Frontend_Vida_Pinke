@@ -13,6 +13,28 @@ import {
   Alert,
 } from 'react-native';
 
+const viewChats = (navigation) => {
+  return fetch("http://192.168.1.18:8000/gettickets", {
+    method: "get",
+    headers: {
+      'Content-type': 'application/json',
+      'Authorization': `Bearer ${global.auth}`, 
+  },
+  })
+  .then((res) => {
+    return res.json()
+  })
+  .then((json) => {
+    //console.log(json)
+   // console.log(json[0].createdBy_id[0].id)
+    //console.log(json[0].createdBy_id[0].email)
+    navigation.navigate('Activechats', {ticketList: json});
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+  };
+
 function MenuScreen({ navigation }) {
     return (
     <SafeAreaView style={styles.container}>
@@ -24,7 +46,7 @@ function MenuScreen({ navigation }) {
               <TouchableOpacity onPress={() => navigation.navigate('Viewtickets')} style={styles.button}>
                 <Text style={styles.buttonText}>View tickets</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => navigation.navigate('Activechats')} style={styles.button}>
+              <TouchableOpacity onPress={() => viewChats(navigation)} style={styles.button}>
                 <Text style={styles.buttonText}>Active chats screen</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => navigation.navigate('Commonproblems')} style={styles.button}>

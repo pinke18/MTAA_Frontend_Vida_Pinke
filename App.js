@@ -13,6 +13,7 @@ import CommonproblemsScreen from './Screens/Commonproblems';
 import ViewticketsAdminScreen from './Screens/ViewticketsAdmin';
 import CallAppScreen from './Screens/CallApp';
 import ChatScreen from './Screens/Chat';
+import SendMessageScreen from './Screens/sendMessage';
 
 
 const Stack = createNativeStackNavigator();
@@ -32,6 +33,7 @@ function App() {
         <Stack.Screen name="ViewticketsAdmin" component={ViewticketsAdminScreen} options={{ title: 'ViewticketsAdmin' }} />
         <Stack.Screen name="CallAppScreen" component={CallAppScreen} options={{ title: 'CallAppScreen' }} />
         <Stack.Screen name="ChatScreen" component={ChatScreen} options={{ title: 'ChatScreen' }} />
+        <Stack.Screen name="SendMessageScreen" component={SendMessageScreen} options={{ title: 'SendMessageScreen' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

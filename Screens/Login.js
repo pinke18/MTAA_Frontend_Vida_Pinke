@@ -38,6 +38,7 @@ const loginUser = (email, password, navigation) => {
     if (typeof json !== 'undefined'){
         global.auth = json.token
         global.username = email
+        global.userid = json.user_id
           if (json.usertype == 'user'){
               navigation.navigate('Menu')
           }
