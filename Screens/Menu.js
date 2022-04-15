@@ -14,11 +14,11 @@ import {
 } from 'react-native';
 
 const viewChats = (navigation) => {
-  return fetch("http://192.168.1.18:8000/gettickets", {
+  return fetch("http://192.168.0.14:8000/gettickets", {
     method: "get",
     headers: {
       'Content-type': 'application/json',
-      'Authorization': `Bearer ${global.auth}`, 
+      'Authorization': `Bearer ${global.auth}`,
   },
   })
   .then((res) => {
@@ -35,12 +35,34 @@ const viewChats = (navigation) => {
   });
   };
 
+const viewDevices = (navigation) => {
+return fetch("http://192.168.0.14:8000/getdevices", {
+  method: "get",
+  headers: {
+    'Content-type': 'application/json',
+    'Authorization': `Bearer ${global.auth}`,
+},
+})
+.then((res) => {
+  return res.json()
+})
+.then((json) => {
+  //console.log(json)
+ // console.log(json[0].createdBy_id[0].id)
+  //console.log(json[0].createdBy_id[0].email)
+  navigation.navigate('Createticket', {devicesList: json});
+})
+.catch((err) => {
+  console.log(err);
+});
+};
+
 function MenuScreen({ navigation }) {
     return (
     <SafeAreaView style={styles.container}>
       <View>
         <Text style={styles.text}>Welcome to our App</Text>
-              <TouchableOpacity onPress={() => navigation.navigate('Createticket')} style={styles.button}>
+              <TouchableOpacity onPress={() => viewDevices(navigation)} style={styles.button}>
                 <Text style={styles.buttonText}>Create ticket</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => navigation.navigate('Viewtickets')} style={styles.button}>
