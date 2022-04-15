@@ -37,6 +37,7 @@ const loginUser = (email, password, navigation) => {
     .then((json) => {
     if (typeof json !== 'undefined'){
         global.auth = json.token
+        global.username = email
           if (json.usertype == 'user'){
               navigation.navigate('Menu')
           }

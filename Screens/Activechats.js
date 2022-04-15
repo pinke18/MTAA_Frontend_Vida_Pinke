@@ -1,6 +1,30 @@
 import * as React from 'react';
 import { View, Text , Button, FlatList, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 
+const onClickChat = (navigation, chatID) => {
+  return fetch("http://192.168.1.18:8000/getmessages?ticketid=" + chatID, {
+    method: "get",
+    headers: {
+      'Content-type': 'application/json',
+      'Authorization': `Bearer ${global.auth}`, 
+  },
+  })
+  .then((res) => {
+    console.log(chatID)
+    return res.json()
+  })
+  .then((json) => {
+    console.log(json)
+    //console.log(json[0].createdBy_id[0].id)
+    //console.log(json[0].createdBy_id[0].email)
+    navigation.navigate('ChatScreen' , {chats: json});
+  })
+  .catch((err) => {
+    Alert.alert("Error retrieving chat")
+    console.log(err);
+  });
+  };
+
 function ActivechatsScreen({ route, navigation }) {
     const ticketList = route.params;
     console.log(ticketList.ticketList);
@@ -10,7 +34,7 @@ function ActivechatsScreen({ route, navigation }) {
         <Text>ActivechatsScreen</Text>
         <FlatList
                   data={ticketList.ticketList}
-                  renderItem={({ item }) => <TouchableOpacity onPress={() => Alert.alert("Moje id je " + item.id.toString() + " využi ma pri fetchi do databázi !")} style={styles.button}>
+                  renderItem={({ item }) => <TouchableOpacity onPress={() => onClickChat(navigation, item.id.toString()) } style={styles.button}>
                   <Text style={styles.buttonText}>{item.name}</Text>
                 </TouchableOpacity>}
               />
