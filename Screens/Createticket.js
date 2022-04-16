@@ -18,7 +18,7 @@ import Tags from "react-native-tags";
 import ModalDropdown from "react-native-modal-dropdown";
 
 const createTicket = (name, issuetype, description, devicetype, createdby) => {
-fetch("http://192.168.0.14:8000/createticket", {
+fetch("http://192.168.1.18:8000/createticket", {
             method: "post",
             headers: {
             "Content-Type": "application/json",
