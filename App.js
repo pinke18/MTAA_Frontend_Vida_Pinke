@@ -9,6 +9,7 @@ import MenuAdminScreen from './Screens/MenuAdmin';
 import ActivechatsScreen from './Screens/Activechats';
 import CreateticketScreen from './Screens/Createticket';
 import ViewticketsScreen from './Screens/Viewtickets';
+import TicketdetailsScreen from './Screens/Ticketdetails';
 import CommonproblemsScreen from './Screens/Commonproblems';
 import ViewticketsAdminScreen from './Screens/ViewticketsAdmin';
 import CallAppScreen from './Screens/CallApp';
@@ -30,6 +31,7 @@ function App() {
         <Stack.Screen name="Commonproblems" component={CommonproblemsScreen} options={{ title: 'Commonproblems' }} />
         <Stack.Screen name="Createticket" component={CreateticketScreen} options={{ title: 'Createticket' }} />
         <Stack.Screen name="Viewtickets" component={ViewticketsScreen} options={{ title: 'Viewtickets' }} />
+        <Stack.Screen name="Ticketdetails" component={TicketdetailsScreen} options={{ title: 'Ticketdetails' }} />
         <Stack.Screen name="ViewticketsAdmin" component={ViewticketsAdminScreen} options={{ title: 'ViewticketsAdmin' }} />
         <Stack.Screen name="CallAppScreen" component={CallAppScreen} options={{ title: 'CallAppScreen' }} />
         <Stack.Screen name="ChatScreen" component={ChatScreen} options={{ title: 'ChatScreen' }} />

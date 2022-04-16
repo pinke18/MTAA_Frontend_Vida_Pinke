@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 
 const viewChats = (navigation) => {
-  return fetch("http://192.168.1.18:8000/getticketsbyID?userid=" + global.userid, {
+  return fetch("http://192.168.0.14:8000/getticketsbyID?userid=" + global.userid, {
     method: "get",
     headers: {
       'Content-type': 'application/json',
@@ -36,7 +36,7 @@ const viewChats = (navigation) => {
   };
 
 const viewDevices = (navigation) => {
-return fetch("http://192.168.1.18:8000/getdevices", {
+return fetch("http://192.168.0.14:8000/getdevices", {
   method: "get",
   headers: {
     'Content-type': 'application/json',
@@ -57,6 +57,28 @@ return fetch("http://192.168.1.18:8000/getdevices", {
 });
 };
 
+const viewTickets = async (navigation) => {
+  return fetch("http://192.168.0.14:8000/getticketsbyID?userid=" + global.userid, {
+    method: "get",
+    headers: {
+      'Content-type': 'application/json',
+      'Authorization': `Bearer ${global.auth}`,
+  },
+  })
+  .then((res) => {
+    return res.json()
+  })
+  .then((json) => {
+    //console.log(json)
+   // console.log(json[0].createdBy_id[0].id)
+    //console.log(json[0].createdBy_id[0].email)
+    navigation.navigate('Viewtickets', {ticketList: json});
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+  };
+
 function MenuScreen({ navigation }) {
     return (
     <SafeAreaView style={styles.container}>
@@ -65,7 +87,7 @@ function MenuScreen({ navigation }) {
               <TouchableOpacity onPress={() => viewDevices(navigation)} style={styles.button}>
                 <Text style={styles.buttonText}>Create ticket</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => navigation.navigate('Viewtickets')} style={styles.button}>
+              <TouchableOpacity onPress={() => viewTickets(navigation)} style={styles.button}>
                 <Text style={styles.buttonText}>View tickets</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => viewChats(navigation)} style={styles.button}>
