@@ -84,6 +84,9 @@ function MenuScreen({ navigation }) {
               <TouchableOpacity onPress={() => viewChats(navigation)} style={styles.button}>
                 <Text style={styles.buttonText}>Active chats screen</Text>
               </TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('UploadImageScreen')} style={styles.button}>
+                <Text style={styles.buttonText}>Upload Image</Text>
+              </TouchableOpacity>
                <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.button}>
               <Text style={styles.buttonText}>Logout</Text>
             </TouchableOpacity>
