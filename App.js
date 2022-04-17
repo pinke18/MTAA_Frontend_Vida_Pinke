@@ -15,6 +15,8 @@ import ViewticketsAdminScreen from './Screens/ViewticketsAdmin';
 import CallAppScreen from './Screens/CallApp';
 import ChatScreen from './Screens/Chat';
 import SendMessageScreen from './Screens/sendMessage';
+import UpdateTicketScreen from './Screens/UpdateTicket';
+import DetailsAdminScreen from './Screens/DetailsAdmin';
 
 
 const Stack = createNativeStackNavigator();
@@ -36,6 +38,8 @@ function App() {
         <Stack.Screen name="CallAppScreen" component={CallAppScreen} options={{ title: 'CallAppScreen' }} />
         <Stack.Screen name="ChatScreen" component={ChatScreen} options={{ title: 'ChatScreen' }} />
         <Stack.Screen name="SendMessageScreen" component={SendMessageScreen} options={{ title: 'SendMessageScreen' }} />
+        <Stack.Screen name="UpdateTicketScreen" component={UpdateTicketScreen} options={{ title: 'UpdateTicketScreen' }} />
+        <Stack.Screen name="DetailsAdminScreen" component={DetailsAdminScreen} options={{ title: 'DetailsAdminScreen' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
