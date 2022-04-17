@@ -11,7 +11,7 @@ const getMedia = async(id) => {
     if(status == 200) {
       // the conversion is done in native code
       let base64Str = res.base64();
-      global.image64 = <Image style = {{height:100, width:100}} source={{uri: 'data:image/png;base64,' + base64Str}}/>
+      global.image64 = <Image style={{height:100, width:100}} source={{uri: 'data:image/png;base64,' + base64Str}}/>
     } else {
       Alert.alert("Error retrieving image")
     }
@@ -39,6 +39,9 @@ const deleteTicket = (navigation, id) => {
  };
 
 const onClickChat = (navigation, chatID, createdBy, assignedTo) => {
+if(!assignedTo) {
+Alert.alert("Cannot chat on unnasigned ticket")
+} else {
 return fetch("http://192.168.0.14:8000/getmessages?ticketid=" + chatID, {
  method: "get",
  headers: {
@@ -61,9 +64,10 @@ return fetch("http://192.168.0.14:8000/getmessages?ticketid=" + chatID, {
  Alert.alert("Error retrieving chat")
  console.log(err);
 });
+}
 };
 
-function TicketdetailsScreen({ navigation, route }) {
+function TicketdetailsScreen({ navigation, route }){
     const ticket = route.params;
     console.log(ticket.item[0]);
     const issueType = ticket.item[0].issueType.replace(/[\])}[{(]/, '').replace(/'/g, '').replace(/]/g, '').split(",");
@@ -71,9 +75,16 @@ function TicketdetailsScreen({ navigation, route }) {
 
     try {
         getMedia(parseInt(ticket.item[0].image_id[0].id))
-    } catch {
-        image64 = <Text style={styles.list}>Not supplied</Text>
+        if (image64){
+                console.log('cool')
+            } else {
+                global.image64 = <Text style={styles.list}>Not supplied</Text>
+            }
     }
+    catch {
+        global.image64 = <Text style={styles.list}>Not supplied</Text>
+    }
+
 
     if (ticket.item[0].stage == 1) {
       stage = <Text style={styles.text}>Sent</Text>;
@@ -87,10 +98,18 @@ function TicketdetailsScreen({ navigation, route }) {
 
     if(ticket.item[0].solutionText){
         solutionText = <Text style={styles.list}>{ticket.item[0].solutionText}</Text>
-    } if(ticket.item[0].solutionVideo) {
-        solutionVideo = <Text style={styles.list}>{ticket.item[0].solutionText}</Text>
     } else {
         solutionText = <Text style={styles.list}>Not supplied</Text>
+    }
+
+    try {
+        if(ticket.item[0].assignedTo_id[0].id){
+                var assignedTo_id = ticket.item[0].assignedTo_id[0].id
+            } else {
+                var assignedTo_id = null
+            }
+    } catch {
+        var assignedTo_id = null
     }
 
     return (
@@ -109,7 +128,7 @@ function TicketdetailsScreen({ navigation, route }) {
       <TouchableOpacity onPress={() => deleteTicket(navigation, ticket.item[0].id)} style={styles.button}>
           <Text style={styles.buttonText}>Delete ticket</Text>
         </TouchableOpacity>
-       <TouchableOpacity onPress={() => onClickChat(navigation, ticket.item[0].id.toString(), ticket.item[0].createdBy_id[0].id, ticket.item[0].assignedTo_id[0].id) } style={styles.button}>
+       <TouchableOpacity onPress={() => onClickChat(navigation, ticket.item[0].id.toString(), ticket.item[0].createdBy_id[0].id, assignedTo_id) } style={styles.button}>
          <Text style={styles.buttonText}>View chat</Text>
        </TouchableOpacity>
       </View>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, Text , Button, FlatList, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 
 const onClickChat = (navigation, chatID, createdBy, assignedTo) => {
-  return fetch("http://192.168.1.18:8000/getmessages?ticketid=" + chatID, {
+  return fetch("http://192.168.0.14:8000/getmessages?ticketid=" + chatID, {
     method: "get",
     headers: {
       'Content-type': 'application/json',
@@ -31,12 +31,26 @@ function ActivechatsScreen({ route, navigation }) {
     //const ticketAdmin = ticketList.
     //const ticketUser = ticketList.
     //console.log(ticketList.ticketList);
+
+    let ticketsWithChats = [];
+
+    for (const element of route.params.ticketList){
+        try {
+            if (element.assignedTo_id[0].id){
+                ticketsWithChats.push(element)
+            }
+        } catch {
+            console.log("Error")
+        }
+
+      }
+
     return (
 
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>ActivechatsScreen</Text>
         <FlatList
-                  data={ticketList.ticketList}
+                  data={ticketsWithChats}
                   renderItem={({ item }) => <TouchableOpacity onPress={() => onClickChat(navigation, item.id.toString(), item.createdBy_id[0].id, item.assignedTo_id[0].id) } style={styles.button}>
                   <Text style={styles.buttonText}>{item.name}</Text>
                 </TouchableOpacity>}

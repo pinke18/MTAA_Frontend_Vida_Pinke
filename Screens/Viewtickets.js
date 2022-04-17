@@ -22,24 +22,38 @@ const ticketInfo = (navigation, id) => {
 
 
 function ViewticketsScreen({ route, navigation }) {
-  const ticketList = route.params;
+  let open = [];
+  let closed = [];
+
+  for (const element of route.params.ticketList){
+      console.log(element.assignedTo_id)
+      if(element.complete){
+        closed.push(element)
+      } else {
+        open.push(element)
+      }
+    }
+
   //const ticketAdmin = ticketList.
   //const ticketUser = ticketList.
   //console.log(ticketList.ticketList);
   return (
 
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Tickets assigned to me</Text>
+      <Text>Open tickets</Text>
       <FlatList
-                data={ticketList.ticketList}
+                data={open}
                 renderItem={({ item }) => <TouchableOpacity onPress={() => ticketInfo(navigation, item.id)} style={styles.button}>
                 <Text style={styles.buttonText}>{item.name}</Text>
               </TouchableOpacity>}
             />
-        <Button
-            title="Logout"
-            onPress={() => navigation.navigate('Login')}
-        />
+      <Text>Closed tickets</Text>
+      <FlatList
+              data={closed}
+              renderItem={({ item }) => <TouchableOpacity onPress={() => ticketInfo(navigation, item.id)} style={styles.button}>
+              <Text style={styles.buttonText}>{item.name}</Text>
+            </TouchableOpacity>}
+          />
     </View>
 
   );
