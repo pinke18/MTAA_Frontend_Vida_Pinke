@@ -75,11 +75,11 @@ function UploadImageScreen({ navigation }) {
     return (
 
       
-
+      
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        
         <Image source={{uri: "http://" + global.serverIP + ":8000/getmedia?mediaid=" + global.lastimage}}
    style={{width: 400, height: 400}} />
-        <Text>Upload image screen</Text>
         <TouchableOpacity onPress={() => launchImageLibrary(navigation)} style={styles.button}>
         <Text style={styles.buttonText}>Choose an image to upload</Text>
     </TouchableOpacity>

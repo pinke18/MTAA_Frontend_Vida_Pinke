@@ -48,7 +48,7 @@ function ActivechatsScreen({ route, navigation }) {
     return (
 
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>ActivechatsScreen</Text>
+        <Text>Choose an ticket to open the chat</Text>
         <FlatList
                   data={ticketsWithChats}
                   renderItem={({ item }) => <TouchableOpacity onPress={() => onClickChat(navigation, item.id.toString(), item.createdBy_id[0].id, item.assignedTo_id[0].id) } style={styles.button}>

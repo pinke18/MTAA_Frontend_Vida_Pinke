@@ -31,20 +31,20 @@ function App() {
         <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login' }} />
         <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'Register' }} />
         <Stack.Screen name="Menu" component={MenuScreen} options={{ title: 'Menu' }} />
-        <Stack.Screen name="MenuAdmin" component={MenuAdminScreen} options={{ title: 'MenuAdmin' }} />
-        <Stack.Screen name="Activechats" component={ActivechatsScreen} options={{ title: 'Activechats' }} />
-        <Stack.Screen name="Commonproblems" component={CommonproblemsScreen} options={{ title: 'Commonproblems' }} />
-        <Stack.Screen name="Createticket" component={CreateticketScreen} options={{ title: 'Createticket' }} />
-        <Stack.Screen name="Viewtickets" component={ViewticketsScreen} options={{ title: 'Viewtickets' }} />
-        <Stack.Screen name="Ticketdetails" component={TicketdetailsScreen} options={{ title: 'Ticketdetails' }} />
-        <Stack.Screen name="Commondetails" component={CommondetailsScreen} options={{ title: 'Commondetails' }} />
-        <Stack.Screen name="ViewticketsAdmin" component={ViewticketsAdminScreen} options={{ title: 'ViewticketsAdmin' }} />
-        <Stack.Screen name="CallAppScreen" component={CallAppScreen} options={{ title: 'CallAppScreen' }} />
-        <Stack.Screen name="ChatScreen" component={ChatScreen} options={{ title: 'ChatScreen' }} />
-        <Stack.Screen name="SendMessageScreen" component={SendMessageScreen} options={{ title: 'SendMessageScreen' }} />
-        <Stack.Screen name="UpdateTicketScreen" component={UpdateTicketScreen} options={{ title: 'UpdateTicketScreen' }} />
-        <Stack.Screen name="DetailsAdminScreen" component={DetailsAdminScreen} options={{ title: 'DetailsAdminScreen' }} />
-        <Stack.Screen name="UploadImageScreen" component={UploadImageScreen} options={{ title: 'UploadImageScreen' }} />
+        <Stack.Screen name="MenuAdmin" component={MenuAdminScreen} options={{ title: 'Menu' }} />
+        <Stack.Screen name="Activechats" component={ActivechatsScreen} options={{ title: 'My chats' }} />
+        <Stack.Screen name="Commonproblems" component={CommonproblemsScreen} options={{ title: 'Common problems' }} />
+        <Stack.Screen name="Createticket" component={CreateticketScreen} options={{ title: 'Create a ticket' }} />
+        <Stack.Screen name="Viewtickets" component={ViewticketsScreen} options={{ title: 'View my tickets' }} />
+        <Stack.Screen name="Ticketdetails" component={TicketdetailsScreen} options={{ title: 'Ticket details' }} />
+        <Stack.Screen name="Commondetails" component={CommondetailsScreen} options={{ title: 'Ticket details' }} />
+        <Stack.Screen name="ViewticketsAdmin" component={ViewticketsAdminScreen} options={{ title: 'View available tickets' }} />
+        <Stack.Screen name="CallAppScreen" component={CallAppScreen} options={{ title: 'Video room' }} />
+        <Stack.Screen name="ChatScreen" component={ChatScreen} options={{ title: 'Chat' }} />
+        <Stack.Screen name="SendMessageScreen" component={SendMessageScreen} options={{ title: 'Send a message' }} />
+        <Stack.Screen name="UpdateTicketScreen" component={UpdateTicketScreen} options={{ title: 'Update a ticket' }} />
+        <Stack.Screen name="DetailsAdminScreen" component={DetailsAdminScreen} options={{ title: 'Ticket Details' }} />
+        <Stack.Screen name="UploadImageScreen" component={UploadImageScreen} options={{ title: 'Upload an Image' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
