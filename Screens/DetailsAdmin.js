@@ -3,7 +3,7 @@ import { View, Text , Button, StyleSheet, FlatList, Image, TouchableOpacity, Ale
 import RNFetchBlob from 'rn-fetch-blob'
 
 const getMedia = async(id) => {
-  await RNFetchBlob.fetch('GET', "http://192.168.0.14:8000/getmedia?mediaid=" + id, {
+  await RNFetchBlob.fetch('GET', "http://" + global.serverIP + ":8000/getmedia?mediaid=" + id, {
       'Authorization': `Bearer ${global.auth}`,
     })
 .then((res) => {
@@ -23,7 +23,7 @@ const getMedia = async(id) => {
   }
 
 const deleteTicket = (navigation, id) => {
-  return fetch("http://192.168.0.14:8000/deleteticket?ticketid=" + id, {
+  return fetch("http://" + global.serverIP + ":8000/deleteticket?ticketid=" + id, {
     method: "delete",
     headers: {
       'Content-type': 'application/json',
@@ -39,7 +39,7 @@ const deleteTicket = (navigation, id) => {
  };
 
 const onClickChat = (navigation, chatID, createdBy, assignedTo) => {
-return fetch("http://192.168.0.14:8000/getmessages?ticketid=" + chatID, {
+return fetch("http://" + global.serverIP + ":8000/getmessages?ticketid=" + chatID, {
  method: "get",
  headers: {
    'Content-type': 'application/json',
@@ -75,6 +75,14 @@ function DetailsAdminScreen({ navigation, route }) {
         global.image64 = <Text style={styles.list}>Not supplied</Text>
     }
 
+    let imageID = 0
+    try{
+      imageID = ticket.item[0].image_id[0].id
+    }
+    catch{
+      imageID = 0
+    }
+
     if (ticket.item[0].stage == 1) {
       stage = <Text style={styles.text}>Sent</Text>;
     } else if(ticket.item[0].stage == 2) {
@@ -103,7 +111,8 @@ function DetailsAdminScreen({ navigation, route }) {
        {stage}
        <Text style={styles.list}>Steps/Video on how to solve </Text>
        {solutionText}
-       {global.image64}
+       <Image source={{uri: "http://" + global.serverIP + ":8000/getmedia?mediaid=" + imageID}}
+   style={{width: 200, height: 200, alignSelf:'center'}} />
       <TouchableOpacity onPress={() => navigation.navigate("UpdateTicketScreen", {ticketID: ticket.ticketID})} style={styles.button}>
           <Text style={styles.buttonText}>Update Ticket</Text>
         </TouchableOpacity>

@@ -14,7 +14,7 @@ import { Form, FormItem, Picker } from 'react-native-form-component';
 
 const addUser = (email, password, repassword, navigation) => {
     if(repassword == password){
-        fetch("http://192.168.1.18:8000/register", {
+        fetch("http://" + global.serverIP + ":8000/register", {
               method: "post",
               headers: {
                 "Content-Type": "application/json",

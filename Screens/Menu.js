@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 
 const viewChats = (navigation) => {
-  return fetch("http://192.168.0.14:8000/getticketsbyID?userid=" + global.userid, {
+  return fetch("http://" + global.serverIP + ":8000/getticketsbyID?userid=" + global.userid, {
     method: "get",
     headers: {
       'Content-type': 'application/json',
@@ -36,7 +36,7 @@ const viewChats = (navigation) => {
   };
 
 const viewDevices = (navigation) => {
-return fetch("http://192.168.0.14:8000/getdevices", {
+return fetch("http://" + global.serverIP + ":8000/getdevices", {
   method: "get",
   headers: {
     'Content-type': 'application/json',
@@ -58,7 +58,7 @@ return fetch("http://192.168.0.14:8000/getdevices", {
 };
 
 const viewTickets = async (navigation) => {
-  return fetch("http://192.168.0.14:8000/getticketsbyID?userid=" + global.userid, {
+  return fetch("http://" + global.serverIP + ":8000/getticketsbyID?userid=" + global.userid, {
     method: "get",
     headers: {
       'Content-type': 'application/json',

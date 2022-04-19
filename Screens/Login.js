@@ -16,7 +16,7 @@ import { Form, FormItem, Picker } from 'react-native-form-component';
 import App from './CallApp';
 
 const loginUser = (email, password, navigation) => {
-  return fetch("http://192.168.0.14:8000/login", {
+  return fetch("http://" + global.serverIP + ":8000/login", {
     method: "post",
     headers: {
       "Content-Type": "application/json",
@@ -58,6 +58,7 @@ function LoginScreen({ navigation }) {
   return (
   <SafeAreaView style={styles.container}>
           <View>
+          <Text style={styles.text}>Welcome to our App</Text>
               <Form onButtonPress={() => loginUser(email, password, navigation)} buttonText={"Login"}>
                   <FormItem
                    label="Email"
@@ -96,6 +97,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 16,
   },
+  text: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    margin: 10,
+ },
   input: {
       height: 40,
       margin: 12,

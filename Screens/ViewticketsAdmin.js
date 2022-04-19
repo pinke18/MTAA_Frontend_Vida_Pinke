@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, Text , Button, FlatList, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 
 const ticketInfo = (navigation, id) => {
-  return fetch("http://192.168.1.18:8000/getticketadmin?ticketid=" + id, {
+  return fetch("http://" + global.serverIP + ":8000/getticketadmin?ticketid=" + id, {
     method: "get",
     headers: {
       'Content-type': 'application/json',
@@ -24,14 +24,14 @@ const ticketInfo = (navigation, id) => {
  const viewTickets = async (navigation) => {
   try {
   let [allTickets, assignedTickets] = await Promise.all([
-    fetch("http://192.168.1.18:8000/gettickets", {
+    fetch("http://" + global.serverIP + ":8000/gettickets", {
       method: "get",
       headers: {
         'Content-type': 'application/json',
         'Authorization': `Bearer ${global.auth}`, 
     },
     }),
-    fetch("http://192.168.1.18:8000/getticketsbyID?userid=" + global.userid, {
+    fetch("http://" + global.serverIP + ":8000/getticketsbyID?userid=" + global.userid, {
       method: "get",
       headers: {
         'Content-type': 'application/json',
@@ -53,7 +53,7 @@ const ticketInfo = (navigation, id) => {
 
 
  const assignTicket = (navigation, assignedTo, ticketid) => {
-  fetch("http://192.168.1.18:8000/updateticket", {
+  fetch("http://" + global.serverIP + ":8000/updateticket", {
               method: "put",
               headers: {
               "Content-Type": "application/json",
@@ -105,10 +105,6 @@ function ViewticketsAdminScreen({ route, navigation }) {
                 <Text style={styles.buttonText}>{item.name}</Text>
               </TouchableOpacity>}
             />
-        <Button
-            title="Logout"
-            onPress={() => navigation.navigate('Login')}
-        />
     </View>
     
   );

@@ -22,6 +22,7 @@ import UploadImageScreen from './Screens/UploadImage';
 
 
 const Stack = createNativeStackNavigator();
+global.serverIP = "192.168.0.227"
 
 function App() {
   return (

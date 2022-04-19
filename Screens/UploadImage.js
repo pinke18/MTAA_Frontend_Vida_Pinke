@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text , Button,Alert, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text , Button,Alert, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import * as ImagePicker from 'react-native-image-picker';
 
 async function launchImageLibrary (navigation) {
@@ -29,21 +29,21 @@ async function launchImageLibrary (navigation) {
     //console.log(response.assets[0].uri)
     global.uri = response.assets[0].uri;
     global.filename = response.assets[0].fileName
-    createTicket()
+    createTicket(navigation)
 
     //console.log('We did it');
   }
 
 }
 
-const createTicket = () => {
+const createTicket = (navigation) => {
     let formdata = new FormData();
     formdata.append("isVideo", false)
     formdata.append("name", global.filename)
     formdata.append("file", {uri: global.uri, name: global.filename, type: 'image/jpeg'})
     console.log("Tu sme")
     console.log(formdata)
-    fetch("http://192.168.1.18:8000/insertmedia", {
+    fetch("http://" + global.serverIP + ":8000/insertmedia", {
                 method: "post",
                 headers: {
                 'Content-Type': 'multipart/form-data',
@@ -53,16 +53,17 @@ const createTicket = () => {
             })
             .then(response => {
                 const statusCode = response.status;
-                return Promise.all([statusCode]);
-                })
-                .then((res) => {
-                console.log(res)
-                if(res=='200'){
-                    Alert.alert("File Uploaded")
-                }
-                else{
-                    Alert.alert('File not uploaded, please try again')
-                }
+                console.log(statusCode)
+                if(statusCode=='200'){
+                  Alert.alert("File Uploaded")
+                  return response.json()
+              }
+              else{
+                  Alert.alert('File not uploaded, please try again')
+              }})
+                .then((json) => {
+                  global.lastimage = json.imageID
+                  navigation.push("UploadImageScreen")
                 })
                 .catch(error => {
                 console.error(error);
@@ -73,7 +74,11 @@ const createTicket = () => {
 function UploadImageScreen({ navigation }) {
     return (
 
+      
+
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Image source={{uri: "http://" + global.serverIP + ":8000/getmedia?mediaid=" + global.lastimage}}
+   style={{width: 400, height: 400}} />
         <Text>Upload image screen</Text>
         <TouchableOpacity onPress={() => launchImageLibrary(navigation)} style={styles.button}>
         <Text style={styles.buttonText}>Choose an image to upload</Text>

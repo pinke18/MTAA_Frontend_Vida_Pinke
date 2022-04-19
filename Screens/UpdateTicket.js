@@ -20,7 +20,7 @@ import ModalDropdown from "react-native-modal-dropdown";
 
 const updateTicket = (navigation, ticketid, stage, complete, solutiontext, solutionimage) => {
   console.log(stage)
-  fetch("http://192.168.1.18:8000/updateticket", {
+  fetch("http://" + global.serverIP + ":8000/updateticket", {
               method: "put",
               headers: {
               "Content-Type": "application/json",
@@ -51,14 +51,14 @@ const updateTicket = (navigation, ticketid, stage, complete, solutiontext, solut
   const viewTickets = async (navigation) => {
     try {
     let [allTickets, assignedTickets] = await Promise.all([
-      fetch("http://192.168.1.18:8000/gettickets", {
+      fetch("http://" + global.serverIP + ":8000/gettickets", {
         method: "get",
         headers: {
           'Content-type': 'application/json',
           'Authorization': `Bearer ${global.auth}`, 
       },
       }),
-      fetch("http://192.168.1.18:8000/getticketsbyID?userid=" + global.userid, {
+      fetch("http://" + global.serverIP + ":8000/getticketsbyID?userid=" + global.userid, {
         method: "get",
         headers: {
           'Content-type': 'application/json',

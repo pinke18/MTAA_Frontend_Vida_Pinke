@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, Text , Button, FlatList, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 
 const ticketInfo = (navigation, id) => {
-  return fetch("http://192.168.0.14:8000/getticketuser?ticketid=" + id, {
+  return fetch("http://" + global.serverIP + ":8000/getticketuser?ticketid=" + id, {
     method: "get",
     headers: {
       'Content-type': 'application/json',

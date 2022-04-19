@@ -3,7 +3,7 @@ import { View, Text , Button, StyleSheet, FlatList, Image, TouchableOpacity, Ale
 import RNFetchBlob from 'rn-fetch-blob'
 
 const getMedia = async(id) => {
-  await RNFetchBlob.fetch('GET', "http://192.168.0.14:8000/getmedia?mediaid=" + id, {
+  await RNFetchBlob.fetch('GET', "http://" + global.serverIP + ":8000/getmedia?mediaid=" + id, {
       'Authorization': `Bearer ${global.auth}`,
     })
 .then((res) => {

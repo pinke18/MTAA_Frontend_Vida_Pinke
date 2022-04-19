@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, Text , Button, FlatList, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 
 const onClickChat = (navigation, chatID, createdBy, assignedTo) => {
-  return fetch("http://192.168.0.14:8000/getmessages?ticketid=" + chatID, {
+  return fetch("http://" + global.serverIP + ":8000/getmessages?ticketid=" + chatID, {
     method: "get",
     headers: {
       'Content-type': 'application/json',
@@ -55,10 +55,6 @@ function ActivechatsScreen({ route, navigation }) {
                   <Text style={styles.buttonText}>{item.name}</Text>
                 </TouchableOpacity>}
               />
-          <Button
-              title="Logout"
-              onPress={() => navigation.navigate('Login')}
-          />
       </View>
     );
   }

@@ -14,7 +14,7 @@ import { Form, FormItem, Picker } from 'react-native-form-component';
 
 
 const sendMessage = (to, from, message, ticketid, navigation) => {
-    fetch("http://192.168.1.18:8000/sendmessage", {
+    fetch("http://" + global.serverIP + ":8000/sendmessage", {
             method: "post",
             headers: {
             "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const sendMessage = (to, from, message, ticketid, navigation) => {
 };
 
 const viewChats = (navigation) => {
-    return fetch("http://192.168.1.18:8000/gettickets", {
+    return fetch("http://" + global.serverIP + ":8000/gettickets", {
       method: "get",
       headers: {
         'Content-type': 'application/json',

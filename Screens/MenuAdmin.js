@@ -16,7 +16,7 @@ import {
 import App from './CallApp';
 
 const viewChats = (navigation) => {
-  return fetch("http://192.168.1.18:8000/getticketsbyID?userid=" + global.userid, {
+  return fetch("http://" + global.serverIP + ":8000/getticketsbyID?userid=" + global.userid, {
     method: "get",
     headers: {
       'Content-type': 'application/json',
@@ -40,14 +40,14 @@ const viewChats = (navigation) => {
 const viewTickets = async (navigation) => {
   try {
   let [allTickets, assignedTickets] = await Promise.all([
-    fetch("http://192.168.1.18:8000/gettickets", {
+    fetch("http://" + global.serverIP + ":8000/gettickets", {
       method: "get",
       headers: {
         'Content-type': 'application/json',
         'Authorization': `Bearer ${global.auth}`, 
     },
     }),
-    fetch("http://192.168.1.18:8000/getticketsbyID?userid=" + global.userid, {
+    fetch("http://" + global.serverIP + ":8000/getticketsbyID?userid=" + global.userid, {
       method: "get",
       headers: {
         'Content-type': 'application/json',

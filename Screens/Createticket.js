@@ -18,7 +18,7 @@ import Tags from "react-native-tags";
 import ModalDropdown from "react-native-modal-dropdown";
 
 const createTicket = (name, issuetype, description, devicetype, createdby) => {
-fetch("http://192.168.0.14:8000/createticket", {
+fetch("http://" + global.serverIP + ":8000/createticket", {
             method: "post",
             headers: {
             "Content-Type": "application/json",
@@ -71,8 +71,8 @@ function CreateticketScreen({ route, navigation }) {
                        onChangeText={(name) => setName(name)}
                        asterik
                        />
+                       <Text>Write the tags you wish to include</Text>
                     <Tags
-                    initialText="Write tags you wish to include"
                     onChangeTags={tags => setTags(tags)}
                     inputStyle={{ backgroundColor: "white" }}
                     tagContainerStyle = {{ color: "red" }}
